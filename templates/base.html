@@ -1,3 +1,7 @@
+<!--
+ * @author Mattes Warning
+ * @author Jan Früh
+-->
 <!DOCTYPE html>
 <html lang="en">
     
@@ -6,6 +10,7 @@
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
     <title>
         {% block title %}
         Biosensori
@@ -42,6 +47,32 @@
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 
 
+    <!-- For now lets just create subpages with the visualizations. We need to integrate them into the buttons above later -->
+    <table>
+        <tr>
+            <td ><li><a href="{{ url_for('calories') }}">Calories</a></li></td>
+            <td ><li><a href="{{ url_for('heartrate') }}">Heartrate</a></li></td>
+            <td ><li><a href="{{ url_for('steps') }}">Steps</a></li></td>
+            <td ><li><a href="{{ url_for('temperature') }}">Temperature</a></li></td>
+        </tr>
+    </table>
+
+    <!-- div for the calorie chart -->
+    <div id="_calories"></div>
+
+    <!-- div for the heartrate chart-->
+    <div id="_heartrate"></div>
+
+    <!-- div for the steps chart-->
+    <div id="_steps"></div>
+
+    <!-- div for the temperature chart-->
+    <div id="_temperature"></div>
+
+
+    <!-- between block and endblock we will insert more html, js from other files -->
+    {% block content %}
+    {% endblock %}
 </body>
 
 </html>
