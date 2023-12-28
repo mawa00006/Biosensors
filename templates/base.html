@@ -9,8 +9,12 @@
 <head>
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- link the .css and the javascript of d3 to the .html -->   
     <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
     <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
+
+    <!-- Add a title for the website-->
     <title>
         {% block title %}
         Biosensori
@@ -20,30 +24,45 @@
 </head>
 
 <body>
+
+    <!-- div for the possibility of splitting the website in four equal cells -->
     <div id="container">
+        <!-- div for the steps chart -->
         <div id="Left"></div>
+
+        <!-- div for the heartrate chart -->
         <div id="middle-left"></div>
+
+        <!-- div for the temperature chart -->
         <div id="middle-right"></div>
+
+        <!-- div for the calories chart -->
         <div id="Right"></div>
     </div>
 
+
+    <!-- button for the steps chart -->
     <button type="button" id="Steps">
         Steps
     </button>
 
+    <!-- button for the heartrate chart -->
     <button type="button" id="Heartrate">
         Heartrate
     </button>
 
+    <!-- button for the temperature chart -->
     <button type="button" id="Temperature">
         Temperature
     </button>
 
+    <!-- button for the calories chart -->
     <button type="button" id="Calories">
         Calories
     </button>
 
 
+    <!-- link the javascript to the .html -->
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 
 

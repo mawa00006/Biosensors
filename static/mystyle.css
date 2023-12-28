@@ -1,3 +1,10 @@
+/*
+Author: Jan Früh
+*/
+
+/* 
+Some basic formatting of the website in principle.
+*/
 body, html {
     height: 100%;
     margin: 0;
@@ -5,7 +12,7 @@ body, html {
 }
 
 /* 
-Styling of the button "Steps"
+Styling of the button "Steps".
 */
 #Steps {
     position:absolute;
@@ -17,7 +24,9 @@ Styling of the button "Steps"
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-
+/* 
+Styling of the button "Heartrate".
+*/
 #Heartrate {
     position:absolute;
     transition: .5s ease;
@@ -28,7 +37,9 @@ Styling of the button "Steps"
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-
+/* 
+Styling of the button "Temperature".
+*/
 #Temperature {
     position:absolute;
     transition: .5s ease;
@@ -38,6 +49,9 @@ Styling of the button "Steps"
     width:200px;
 }
 
+/* 
+Styling of the button "Calories".
+*/
 #Calories {
     position:absolute;
     transition: .5s ease;
@@ -47,6 +61,9 @@ Styling of the button "Steps"
     width:200px;
 }
 
+/* 
+Styling of the container in which all the cells below are possibily represented after pressing the buttons.
+*/
 #container {
     display: table;
     height: 90%;
@@ -55,10 +72,18 @@ Styling of the button "Steps"
     width: 100%;
 }
 
+
+/*
+Define a common size of the cells in pixels.
+*/
 #Left, #middle-left ,#middle-right,  #Right{
     padding: 532px;
 }
 
+/*
+By default, all cells are hidden. When the button is pressed, the cell is represented in the defined 
+"background-color".
+*/
 #Left {
     background-color: green;
     display: none;
