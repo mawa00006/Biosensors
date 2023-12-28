@@ -1,4 +1,8 @@
-# Author: Mattes Warning
+"""
+ @author Mattes Warning
+ @author Jan Früh
+
+"""
 from flask import Flask, render_template, redirect, url_for, request
 import random
 import json
