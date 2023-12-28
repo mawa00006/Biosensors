@@ -7,11 +7,11 @@
 
 
 <script type="text/javascript" >
-    // 'data' returned from function "heartrate" in flaskServer.py
-    // will be accessed from 'temperature.js'
+    // 'data' returned from function "calories" in flaskServer.py
+    // will be accessed from 'calories.js'
     dataset = {{ data | safe }};
 </script>
 
-<script src="{{ url_for('static', filename='heartrate.js') }}"></script>
+<script src="{{ url_for('static', filename='calories.js') }}"></script>
 
 {% endblock %}
