@@ -24,16 +24,12 @@ d3.csv(dataset).then(function(data) {
     });
 
 // X axis
-var x = d3.scaleBand()
+var x = d3.scaleTime()
   .range([ 0, width ])
-  .domain(data.map(function(d) { return d.date; }))
-  .padding(0.2);
+  .domain(d3.extent(data, function(d) { return d.date; }));
 svg.append("g")
   .attr("transform", "translate(0," + (height -margin.bottom) + ")")
   .call(d3.axisBottom(x))
-  .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
 
 // Add Y axis
 var y = d3.scaleLinear()
@@ -49,7 +45,7 @@ svg.selectAll("mybar")
   .append("rect")
     .attr("x", function(d) { return x(d.date); })
     .attr("y", function(d) { return y(d.Temperature); })
-    .attr("width", x.bandwidth())
+    .attr("width", 15)
     .attr("height", function(d) { return height - margin.bottom - y(d.Temperature); })
     .attr("fill", "#69b3a2")
 
