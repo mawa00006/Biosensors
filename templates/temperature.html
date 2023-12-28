@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!--
+ * @author Mattes Warning
+-->
 
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+
+<script type="text/javascript" >
+    // 'data' returned from function "temperature" in flaskServer.py
+    // will be accessed from 'temperature.js'
+    dataset = {{ data | safe }};
+</script>
+
+<script src="{{ url_for('static', filename='temperature.js') }}"></script>
+
+{% endblock %}
