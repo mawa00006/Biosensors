@@ -48,6 +48,7 @@ def replace_missing_values(df):
 
     return filled_df
 
+
 # In the provided CSV file there are some missing datapoints (not every hour has 60 measurements)
 # Therefore we need to figure out which measurements are missing, how many are missing in total and
 # figure out a way to work with them (average? interpolate? predict?)
@@ -77,4 +78,3 @@ filled_data = replace_missing_values(original_data)
 
 # Save data
 filled_data.to_csv('static/filled_biosensors.csv')
-
