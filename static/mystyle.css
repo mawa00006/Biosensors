@@ -4,6 +4,9 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+/* 
+Styling of the button "Steps"
+*/
 #Steps {
     position:absolute;
     transition: .5s ease;
