@@ -1,0 +1,17 @@
+<!--
+ * @author Mattes Warning
+-->
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<script type="text/javascript" >
+    // 'data' returned from function "temperature" in flaskServer.py
+    // will be accessed from 'temperature.js'
+    dataset = {{ data | safe }};
+</script>
+
+<script src="{{ url_for('static', filename='temperature.js') }}"></script>
+
+{% endblock %}

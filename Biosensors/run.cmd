@@ -1,0 +1,2 @@
+python flaskServer.py
+pause()
