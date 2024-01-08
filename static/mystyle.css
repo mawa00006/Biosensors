@@ -1,5 +1,6 @@
 /*
 Author: Jan Früh
+Author: Sophia Gaupp
 */
 
 /* 
@@ -8,7 +9,7 @@ Some basic formatting of the website in principle.
 body, html {
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* 
@@ -19,9 +20,10 @@ Styling of the button "Steps".
     transition: .5s ease;
     top: 10%;
     left: 15%;
-    height:100px;
-    width:200px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    height:"100";
+    width:"100";
+    background: transparent;
+    border: none;
 }
 
 /* 
@@ -32,9 +34,10 @@ Styling of the button "Heartrate".
     transition: .5s ease;
     top: 10%;
     left: 35%;
-    height:100px;
-    width:200px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    height:"100";
+    width:"100";
+    background: transparent;
+    border: none;
 }
 
 /* 
@@ -45,8 +48,10 @@ Styling of the button "Temperature".
     transition: .5s ease;
     top: 10%;
     left: 55%;
-    height:100px;
-    width:200px;
+    height:"100";
+    width:"100";
+    background: transparent;
+    border: none;
 }
 
 /* 
@@ -57,8 +62,10 @@ Styling of the button "Calories".
     transition: .5s ease;
     top: 10%;
     left: 75%;
-    height:100px;
-    width:200px;
+    height:"100";
+    width:"100";
+    background: transparent;
+    border: none;
 }
 
 /* 
