@@ -79,34 +79,10 @@ Styling of the container in which all the cells below are possibily represented 
     width: 100%;
 }
 
-
-/*
-Define a common size of the cells in pixels.
+/*Define a common size of the cells in pixels. By default, all cells are hidden. When the button is pressed, 
+the cell is represented in the defined size.
 */
-#Left, #middle-left ,#middle-right,  #Right{
+#steps, #heartrate, #temperature, #calories{
     padding: 532px;
-}
-
-/*
-By default, all cells are hidden. When the button is pressed, the cell is represented in the defined 
-"background-color".
-*/
-#Left {
-    background-color: green;
     display: none;
-}
-
-#middle-left {
-    background-color: yellow;
-    display: none; 
-}
-
-#middle-right {
-    background-color: blue;
-    display: none; 
-}
-
-#Right {
-    background-color: red;
-    display: none; 
 }

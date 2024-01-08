@@ -26,20 +26,20 @@
 
 <body>
 
-    <!-- div for the possibility of splitting the website in four equal cells -->
-    <div id="container">
-        <!-- div for the steps chart -->
-        <div id="Left"></div>
+    
+    <!-- svg for the possibility of splitting the website in four equal cells -->
 
-        <!-- div for the heartrate chart -->
-        <div id="middle-left"></div>
+    <!-- svg for the steps chart -->
+    <svg id="steps" width="532" height="532"></svg>
 
-        <!-- div for the temperature chart -->
-        <div id="middle-right"></div>
+    <!-- svg for the heartrate chart -->
+    <svg id="heartrate" width="532" height="532"></svg>
 
-        <!-- div for the calories chart -->
-        <div id="Right"></div>
-    </div>
+    <!-- svg for the temperature chart -->
+    <svg id="temperature" width="532" height="532"></svg>
+
+    <!-- svg for the calories chart -->
+    <svg id="calories" width="532" height="532"></svg>
 
 
     <!-- button for the steps chart -->
@@ -90,6 +90,8 @@
                 id="path5" />
             </g>
         </svg>
+        Steps
+        <element onclick="myScript">
     </button>
 
     <!-- button for the heartrate chart -->
@@ -221,6 +223,11 @@
         </svg>
     </button>
 
+
+    <!-- read data -->
+    <script type="text/javascript" >
+    dataset = {{ data | safe }};
+    </script>
 
     <!-- link the javascript to the .html -->
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
