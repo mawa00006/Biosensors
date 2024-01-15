@@ -95,6 +95,17 @@ document.getElementById('Steps').addEventListener('click', ()=>{
         .attr("height", function(d) { return height - margin.bottom - y(d.Steps); })
         .attr("fill", "#69b3a2")
 
+        svg.selectAll("text")
+            .data(data)
+            .enter
+            .append("text")
+            .attr("x", function(d){ return x(d.date) + 7.5; })
+            .attr("y", function(d){ return y(d.Steps) + 10; })
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "9px")
+            .attr("fill" , "white")
+            .attr("text-anchor", "middle")
+            .text(function(d) { return d.Steps; });
         })
 
         //Distinguish which combination of buttons is pressed and call the function "Split".
@@ -320,6 +331,18 @@ document.getElementById('Calories').addEventListener('click', ()=>{
         .attr("width", 15)
         .attr("height", function(d) { return height - margin.bottom - y(d.Calories); })
         .attr("fill", "#69b3a2")
+
+        svg.selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", function(d){ return x(d.date) + 7.5; })
+            .attr("y", function(d){ return y(d.Calories) + 10; })
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "9px")
+            .attr("fill" , "white")
+            .attr("text-anchor", "middle")
+            .text(function(d) { return d.Calories; });
 
         })
         if (firstbutton && secondbutton) Split();
