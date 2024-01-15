@@ -74,7 +74,7 @@ document.getElementById('Steps').addEventListener('click', ()=>{
         .domain(d3.extent(data, function(d) { return d.date; }));
 
         svg.append("g")
-        .attr("transform", "translate(0," + (height -margin.bottom) + ")")
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
         .call(d3.axisBottom(x))
 
         // Add Y axis
@@ -177,11 +177,32 @@ document.getElementById('Heartrate').addEventListener('click', ()=>{
         svg.append("g")
           .call(d3.axisLeft(y));
 
+
+            // Set the gradient
+        svg.append("linearGradient")
+          .attr("id", "line-gradient")
+          .attr("gradientUnits", "userSpaceOnUse")
+          .attr("x1", 0)
+          .attr("y1", y(0))
+          .attr("x2", 0)
+          .attr("y2", y(190))
+          .selectAll("stop")
+            .data([
+                {offset: "0%", color: "black"},
+                {offset: "50%", color: "grey"},
+                {offset: "60%", color: "blue"},
+                {offset: "70%", color: "green"},
+                {offset: "80%", color: "yellow"},
+                {offset: "90%", color: "red"},
+            ])
+          .enter().append("stop")
+            .attr("offset", function(d) { return d.offset; })
+            .attr("stop-color", function(d) { return d.color; });
         // Add the line
         svg.append("path")
           .datum(data)
           .attr("fill", "none")
-          .attr("stroke", "steelblue")
+          .attr("stroke", "url(#line-gradient)")
           .attr("stroke-width", 1.5)
           .attr("d", d3.line()
             .x(function(d) { return x(d.date); })
