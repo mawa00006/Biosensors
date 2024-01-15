@@ -80,7 +80,7 @@ document.getElementById('Steps').addEventListener('click', ()=>{
         // Add Y axis
         var y = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) { return d.Steps; })])
-        .range([ height , 0]);
+        .range([ height  - margin.bottom, 0]);
         svg.append("g")
         .call(d3.axisLeft(y));
 
@@ -176,7 +176,8 @@ document.getElementById('Heartrate').addEventListener('click', ()=>{
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.HR); })
           );
-        });
+            });
+
     }else {
         secondbutton = false
         heartrate.style.display = "none";
@@ -232,7 +233,7 @@ document.getElementById('Temperature').addEventListener('click', ()=>{
         // Add Y axis
         var y = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) { return d.Temperature; })])
-        .range([ height , 0]);
+        .range([height - margin.bottom , 0]);
         svg.append("g")
         .call(d3.axisLeft(y));
 
@@ -247,9 +248,8 @@ document.getElementById('Temperature').addEventListener('click', ()=>{
         .attr("height", function(d) { return height - margin.bottom - y(d.Temperature); })
         .attr("fill", "#69b3a2")
 
-        })
-
         if (firstbutton && secondbutton) Split();
+        });
     }else {
         thirdbutton = false
         temperature.style.display = "none";
@@ -306,7 +306,7 @@ document.getElementById('Calories').addEventListener('click', ()=>{
         // Add Y axis
         var y = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) { return d.Calories; })])
-        .range([ height , 0]);
+        .range([ height - margin.bottom , 0]);
         svg.append("g")
         .call(d3.axisLeft(y));
 
