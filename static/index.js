@@ -69,7 +69,7 @@ document.getElementById('Steps').addEventListener('click', ()=>{
         });
 
         // X axis
-        var x = d3.scaleTime()
+        var x = d3.scaleUtc()
         .range([ 0, width ])
         .domain(d3.extent(data, function(d) { return d.date; }));
 
@@ -163,7 +163,7 @@ document.getElementById('Heartrate').addEventListener('click', ()=>{
         });
 
         // Add X axis --> date format
-        var x = d3.scaleTime()
+        var x = d3.scaleUtc()
           .domain(d3.extent(data, function(d) { return d.date; }))
           .range([0, width]);
         svg.append("g")
@@ -234,7 +234,7 @@ document.getElementById('Temperature').addEventListener('click', ()=>{
         });
 
         // X axis
-        var x = d3.scaleTime()
+        var x = d3.scaleUtc()
         .range([ 0, width ])
         .domain(d3.extent(data, function(d) { return d.date; }));
         svg.append("g")
@@ -299,14 +299,16 @@ document.getElementById('Calories').addEventListener('click', ()=>{
 
         // When reading the data, format variables:
         var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%SZ");
+        var formatTime = d3.utcFormat("%Y-%m-%dT%H:%M:%SZ");
 
         data.forEach(function(d) {
           d.date = parseTime(d.Time);
           d.Calories = +d.Calories;
+          console.log(d.date);
         });
 
         // X axis
-        var x = d3.scaleTime()
+        var x = d3.scaleUtc()
         .range([ 0, width ])
         .domain(d3.extent(data, function(d) { return d.date; }));
         svg.append("g")
@@ -340,7 +342,7 @@ document.getElementById('Calories').addEventListener('click', ()=>{
             .attr("y", function(d){ return y(d.Calories) + 10; })
             .attr("font-family" , "sans-serif")
             .attr("font-size" , "9px")
-            .attr("fill" , "white")
+            .attr("fill" , "black")
             .attr("text-anchor", "middle")
             .text(function(d) { return d.Calories; });
 
