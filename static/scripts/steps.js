@@ -21,13 +21,9 @@ function generateStepsGraph() {
         var endDate = range.endDate._d; // Access the end date
 
 
-        // Set the end date to a specific day, month, and year (e.g., December 31, 2024)
-        //endDate.setUTCDate(21);
-        //endDate.setUTCMonth(6); // December is 11-indexed in JavaScript
+        // Set year to 2015
         endDate.setUTCFullYear(2015);
-          // Set the end date to a specific day, month, and year (e.g., December 31, 2024)
-        //startDate.setUTCDate(21);
-        //startDate.setUTCMonth(6); // December is 11-indexed in JavaScript
+        // Set year to 2015
         startDate.setUTCFullYear(2015);
 
         console.log(startDate)
