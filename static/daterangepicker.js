@@ -1,4 +1,13 @@
-        var selectedDateRange;
+/*
+Author: Sophia Gaupp
+Author: Mattes Warning
+*/
+
+// Initialize first with the current day
+var selectedDateRange = {
+    startDate: moment(),
+    endDate: moment()
+};
         $(document).ready(function () {
             // Initialize DateRangePicker
             $('#reportrange').daterangepicker({
@@ -13,12 +22,15 @@
                 }
             });
 
-            // Show the selected date range in the element
+            // Show the default date range
+            $('#reportrange').find('span').html(selectedDateRange.startDate.format('MMMM D, YYYY') + ' - ' + selectedDateRange.endDate.format('MMMM D, YYYY'));
+
+            // Show the selected date range
             $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
                 $(this).find('span').html(picker.startDate.format('MMMM D, YYYY') + ' - ' + picker.endDate.format('MMMM D, YYYY'));
                 selectedDateRange = {
-                    startTime: picker.startDate,
-                    endTime: picker.endDate
+                    startDate: picker.startDate,
+                    endDate: picker.endDate
                 }
 
             });
