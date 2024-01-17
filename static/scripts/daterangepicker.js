@@ -27,7 +27,7 @@ $(document).ready(function () {
         .find("span")
         .html(selectedDateRange.startDate.format("MMMM D, YYYY") + " - " + selectedDateRange.endDate.format("MMMM D, YYYY"));
 
-    // Show the selected date range when a new range is choosen
+    // Show the selected date range when a new range is chosen
     $("#reportrange").on("apply.daterangepicker", function (ev, picker) {
         $(this)
             .find("span")
