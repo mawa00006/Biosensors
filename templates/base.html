@@ -5,103 +5,86 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="utf-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
 
-    <!-- link the .css and the javascript of d3 to the .html -->   
-    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
-    <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
+        <!-- Add a title for the website-->
+        <title>
+            {% block title %} Biosensori {% endblock %}
+        </title>
 
-    <!-- Add a title for the website-->
-    <title>
-        {% block title %}
-        Biosensori
-        {% endblock %}
-    </title>
+        <!-- Link js libraries and stylesheets -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.bundle.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
+        <script type="text/javascript" src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.bundle.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.js"></script>
-    
-    <style> #openPickerBtn {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 9999; /* Ensure the button is above other elements */
-    }</style>    
+        <style>
+            #openPickerBtn {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 9999; /* Ensure the button is above other elements */
+            }
+        </style>
+    </head>
 
-    
-</head>
+    <body style="margin: 60px 0;">
+        <!-- svg for the possibility of splitting the website in four equal cells -->
 
-<body style="margin: 60px 0">
+        <!-- svg for the steps chart -->
+        <svg id="steps" width="532" height="532"></svg>
 
-    <!-- svg for the possibility of splitting the website in four equal cells -->
+        <!-- svg for the heartrate chart -->
+        <svg id="heartrate" width="532" height="532"></svg>
 
-    <!-- svg for the steps chart -->
-    <svg id="steps" width="532" height="532"></svg>
+        <!-- svg for the temperature chart -->
+        <svg id="temperature" width="532" height="532"></svg>
 
-    <!-- svg for the heartrate chart -->
-    <svg id="heartrate" width="532" height="532"></svg>
+        <!-- svg for the calories chart -->
+        <svg id="calories" width="532" height="532"></svg>
 
-    <!-- svg for the temperature chart -->
-    <svg id="temperature" width="532" height="532"></svg>
+        <!-- Buttons + Icons -->
 
-    <!-- svg for the calories chart -->
-    <svg id="calories" width="532" height="532"></svg>
+        <!-- button for the steps chart -->
+        <button type="button" class="svg-button" id="Steps">
+            <img src="static/StepsIcon.svg" alt="Calories" width="100" height="100" />
+        </button>
 
+        <!-- Button for the heartrate chart -->
+        <button type="button" class="svg-button" id="Heartrate">
+            <img src="static/HeartbeatsIcon.svg" alt="Calories" width="100" height="100" />
+        </button>
 
-    <!-- Buttons + Icons -->
+        <!-- Button for the temperature chart -->
+        <button type="button" class="button" id="Temperature">
+            <img src="static/TemperatureIcon.svg" alt="Calories" width="100" height="100" />
+        </button>
 
+        <!-- Button for the calories chart -->
+        <button type="button" class="button" id="Calories">
+            <img src="static/CaloriesIcon.svg" alt="Calories" width="100" height="100" />
+        </button>
 
-    <!-- button for the steps chart -->
-    <button type="button" class="svg-button" id="Steps">
-    <img src="static/StepsIcon.svg" alt="Calories" width="100" height="100">
-    </button>
+        <!-- Button for Date Range Picker -->
+        <button id="openPickerBtn" class="btn btn-primary">Open Date Range Picker</button>
 
-    <!-- button for the heartrate chart -->
-    <button type="button" class="svg-button" id="Heartrate">
-    <img src="static/HeartbeatsIcon.svg" alt="Calories" width="100" height="100">
-    </button>
+        <!-- DateRangePicker container -->
+        <div id="reportrange" class="form-control"><i class="glyphicon glyphicon-calendar"></i>&nbsp; <span></span> <b class="caret"></b></div>
 
-    <!-- button for the temperature chart -->
-    <button type="button" class="button" id="Temperature">
-    <img src="static/TemperatureIcon.svg" alt="Calories" width="100" height="100">
-    </button>
+        <!-- Script imports at bottom of <body> to improve display speed  -->
+        <script type="text/javascript" , src="static/daterangepicker.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 
-    <!-- button for the calories chart -->
-    <button type="button" class="button" id="Calories">
-    <img src="static/CaloriesIcon.svg" alt="Calories" width="100" height="100">
-    </button>
-
-
-
-    <!-- read data -->
-    <script type="text/javascript" >
-    dataset = {{ data | safe }};
-    </script>
-
-    <!-- link the javascript to the .html -->
-    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
-    <button id="openPickerBtn" class="btn btn-primary">Open Date Range Picker</button>
-
-    <!-- DateRangePicker container -->
-    <div id="reportrange" class="form-control">
-        <i class="glyphicon glyphicon-calendar"></i>&nbsp;
-        <span></span> <b class="caret"></b>
-    </div>
-
-    <script type="text/javascript", src="static/daterangepicker.js"></script>
-
-    <!-- between block and endblock we will insert more html, js from other files -->
-    {% block content %}
-    {% endblock %}
-
-    
-</body>
-
+        <!-- read data -->
+        <script type="text/javascript">
+            dataset = {{ data | safe }};
+        </script>
+    </body>
 </html>
