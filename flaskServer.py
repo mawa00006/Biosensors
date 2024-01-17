@@ -23,7 +23,7 @@ def index():
 # Define the 'base' route, which renders the 'base.html' template
 @app.route('/base')
 def base():
-    return render_template('base.html', data="'static/small_biosensors.csv'")
+    return render_template('base.html', data="'static/biosensors.csv'")
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
