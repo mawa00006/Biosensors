@@ -22,6 +22,7 @@ Styling of the button "Steps".
     left: 15%;
     height:"100";
     width:"100";
+    border-radius: 100%;
     background: transparent;
     border: none;
 }
@@ -36,6 +37,7 @@ Styling of the button "Heartrate".
     left: 35%;
     height:"100";
     width:"100";
+    border-radius: 100%;
     background: transparent;
     border: none;
 }
@@ -50,6 +52,7 @@ Styling of the button "Temperature".
     left: 55%;
     height:"100";
     width:"100";
+    border-radius: 100%;
     background: transparent;
     border: none;
 }
@@ -64,6 +67,7 @@ Styling of the button "Calories".
     left: 75%;
     height:"100";
     width:"100";
+    border-radius: 100%;
     background: transparent;
     border: none;
 }
