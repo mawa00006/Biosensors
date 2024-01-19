@@ -69,20 +69,39 @@ Styling of the button "Calories".
 }
 
 /* 
-Styling of the container in which all the cells below are possibily represented after pressing the buttons.
+Styling of the container in which all the cells of a css grid below. 
 */
-#container {
-    display: table;
-    height: 90%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+.grid-container {
+    display: grid;
+    /*Building a 2x2 Matrix for storing the graphs.*/
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0px;
+    /*Using the whole possible window size of the device.*/
+    height: 100vh;
+    width: 100vh;
+}
+/*
+Some extra settings for the css grid container.
+*/
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 80px ;
+    font-size: 30px;
 }
 
-/*Define a common size of the cells in pixels. By default, all cells are hidden. When the button is pressed, 
-the cell is represented in the defined size.
+/*
+Container for each field in the grid-container.
 */
-#steps, #heartrate, #temperature, #calories{
-    padding: 532px;
+.graph-container{
+    border: 1px solid  #ccc;
+    padding: 10px;
+}
+
+/*
+Makes it possible to operate on an graph-container dynamically (hide/show).
+*/
+.hidden-row {
     display: none;
 }
