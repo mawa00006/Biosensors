@@ -40,35 +40,40 @@
             <div class="graph-container hidden-row" id="calories"></div> 
         </div>
 
+        <!--Implement a header which includes all buttons, the current selected day and the date range picker-->
+        <header>
+            <nav>    
+            <!-- Buttons + Icons -->
 
-        
-        <!-- Buttons + Icons -->
+            <!-- button for the steps chart -->
+            <button type="button" class="svg-button" id="Steps" onclick="displayRow(item)">
+                <img src="static/icons/StepsIcon.svg" alt="Calories" width="100" height="100" />
+            </button>
 
-        <!-- button for the steps chart -->
-        <button type="button" class="svg-button" id="Steps" onclick="displayRow(item)">
-            <img src="static/icons/StepsIcon.svg" alt="Calories" width="100" height="100" />
-        </button>
+            <!-- Button for the heartrate chart -->
+            <button type="button" class="svg-button" id="Heartrate" onclick="displayRow(item)">
+                <img src="static/icons/HeartbeatsIcon.svg" alt="Calories" width="100" height="100" />
+            </button>
 
-        <!-- Button for the heartrate chart -->
-        <button type="button" class="svg-button" id="Heartrate" onclick="displayRow(item)">
-            <img src="static/icons/HeartbeatsIcon.svg" alt="Calories" width="100" height="100" />
-        </button>
+            <!-- Button for the temperature chart -->
+            <button type="button" class="button" id="Temperature" onclick="displayRow(item)">
+                <img src="static/icons/TemperatureIcon.svg" alt="Calories" width="100" height="100" />
+            </button>
 
-        <!-- Button for the temperature chart -->
-        <button type="button" class="button" id="Temperature" onclick="displayRow(item)">
-            <img src="static/icons/TemperatureIcon.svg" alt="Calories" width="100" height="100" />
-        </button>
+            <!-- Button for the calories chart -->
+            <button type="button" class="button" id="Calories" onclick="displayRow(item)">
+                <img src="static/icons/CaloriesIcon.svg" alt="Calories" width="100" height="100" />
+            </button>
 
-        <!-- Button for the calories chart -->
-        <button type="button" class="button" id="Calories" onclick="displayRow(item)">
-            <img src="static/icons/CaloriesIcon.svg" alt="Calories" width="100" height="100" />
-        </button>
+            <!-- Button for Date Range Picker -->
+            <button id="openPickerBtn" class="btn btn-primary">Open Date Range Picker</button>
 
-        <!-- Button for Date Range Picker -->
-        <button id="openPickerBtn" class="btn btn-primary">Open Date Range Picker</button>
+            <!-- DateRangePicker container -->
+            <div id="reportrange" class="form-control"><i class="glyphicon glyphicon-calendar"></i>&nbsp; <span></span> <b class="caret"></b></div>
+            </nav>
+        </header>
 
-        <!-- DateRangePicker container -->
-        <div id="reportrange" class="form-control"><i class="glyphicon glyphicon-calendar"></i>&nbsp; <span></span> <b class="caret"></b></div>
+
 
         <!-- Script imports at bottom of <body> to improve display speed  -->
         <script type="text/javascript" , src="static/scripts/daterangepicker.js"></script>
