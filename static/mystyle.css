@@ -77,13 +77,13 @@ Styling of the container in which all the cells of a css grid below.
 */
 .grid-container {
     display: grid;
-    /*Building a 2x2 Matrix for storing the graphs.*/
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0px;
-    /*Using the whole possible window size of the device.*/
     height: 100vh;
-    width: 100vh;
+    width: 100vw;
+    grid-template-rows: repeat(auto-fit, minmax( auto));
+    grid-template-columns: repeat(2, auto);
+    padding: 0px;
+    margin: 0;
+    justify-content: center;
 }
 /*
 Some extra settings for the css grid container.
@@ -92,15 +92,7 @@ Some extra settings for the css grid container.
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 80px ;
-    font-size: 30px;
-}
-
-/*
-Container for each field in the grid-container.
-*/
-.graph-container{
-    border: 1px solid  #ccc;
-    padding: 10px;
+    font-size: 10px;
 }
 
 /*
