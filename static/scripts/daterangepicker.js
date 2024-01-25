@@ -11,6 +11,7 @@ var selectedDateRange = {
     startDate = selectedDateRange.startDate._d
     endDate = selectedDateRange.endDate._d
 
+
     // Set the end date to a specific day, month, and year (e.g., December 31, 2024)
     endDate.setUTCDate(21);
     endDate.setUTCMonth(6); // December is 11-indexed in JavaScript
@@ -20,8 +21,8 @@ var selectedDateRange = {
     startDate.setUTCMonth(6); // December is 11-indexed in JavaScript
     startDate.setUTCFullYear(2015);
 
-    selectedDateRange.startDate._d = startDate
-    selectedDateRange.endDate._s = endDate
+    selectedDateRange.startDate._d = convertUTCDateToLocalDate(startDate);
+    selectedDateRange.endDate._s = convertUTCDateToLocalDate(endDate);
 $(document).ready(function () {
     // Initialize DateRangePicker
     $("#reportrange").daterangepicker({
