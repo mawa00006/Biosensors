@@ -17,7 +17,7 @@ function generateCaloriesGraph() {
         d3.csv(dataset).then(function(data) {
         var range = getSelectedDateRange();
         var startDate = range.startDate._d; // Access the start date
-        var endDate = range.endDate._d; // Access the end date
+        var endDate = new Date(range.startDate._d.getTime()); // Access the end date
 
         console.log(startDate, endDate)
 
