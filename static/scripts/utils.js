@@ -65,10 +65,20 @@ function preProcessAndAggregateData(data, variable){
 
 // Custom tick formatter function that displays the date for the first tick
 // and the hour for other ticks
-function customTickFormat(date, tickValues) {
+function customTickFormat(date, tickValues, variable = NaN) {
     if (date.getTime() === tickValues[0].getTime()) {
-        // Display date for the first tick
-        return d3.timeFormat("%d.%m")(date);
+
+        // For Heartrate we do not add an extra date (last hour of previous day) to the graph
+        // so we do not need to change the date of the first tick
+        if(variable != 'Heartrate') {
+            // Display date of the next day for the first tick
+            var nextDay = new Date(date.getTime());
+            nextDay.setDate(date.getDate() + 1);
+            return d3.timeFormat("%d.%m")(nextDay);
+        }
+        else {
+            return d3.timeFormat("%d.%m")(date)
+        }
     } else {
         // Display hour for other ticks
         return d3.timeFormat("%H")(date);}
