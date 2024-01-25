@@ -17,45 +17,32 @@ function generateTemperatureGraph() {
               "translate(" + margin.left + "," + margin.top + ")");
 
         d3.csv(dataset).then(function(data) {
-        var range = getSelectedDateRange();
-        var startDate = range.startDate._d; // Access the start date
-        var endDate = range.endDate._d; // Access the end date
 
-        // TODO only display data for the first day
-        // Set year to 2015
-        endDate.setUTCFullYear(2015);
-        // Set year to 2015
-        startDate.setUTCFullYear(2015);
+        data = preProcessAndAggregateData(data, 'Temperature')
 
-        // We want to display all data from the start of the startDate till the end of endDay
-        startDate.setUTCHours(0, 0, 0, 0);
-        endDate.setUTCHours(23, 59, 0, 0);
-
-        // When reading the data, format variables:
-        var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%SZ");
-
-        data.forEach(function(d) {
-          d.date = parseTime(d.Time);
-          d.HR = +d.HR;
-        });
-
-        // Filter the data based on the selected date range
-        data = data.filter(function (d) {
-        return d.date >= startDate && d.date <= endDate;
-        });
-
-        // TODO show exactly 24 bins for each day
         // X axis
         var x = d3.scaleUtc()
         .range([ 0, width - margin.left - margin.right])
         .domain(d3.extent(data, function(d) { return d.date; }));
+
+        // Set tick values of X axis to every 60 minutes
+        var tickValues = d3.timeMinute.every(60).range(x.domain()[0], d3.timeHour.offset(x.domain()[1], 1));
         svg.append("g")
-        .attr("transform", "translate(0," + (height -margin.bottom) + ")")
-        .call(d3.axisBottom(x))
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(function(date) {
+            return customTickFormat(date, tickValues);
+        }));
+
+        // Calculate the mean of all temperature values
+        var meanTemperature = d3.mean(data, function(d) { return d.Temperature; });
+
+        data.forEach(function(d) {
+                d.Temperature = d.Temperature - meanTemperature
+                });
 
         // Add Y axis
         var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return d.Temperature; })])
+        .domain([d3.min(data, function(d) { return d.Temperature; }) + -1, d3.max(data, function(d) { return d.Temperature; }) + 1])
         .range([height - margin.bottom , 0]);
         svg.append("g")
         .call(d3.axisLeft(y));
@@ -67,16 +54,44 @@ function generateTemperatureGraph() {
         .attr("y", 6)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .text("Heartrate (bpm)");
+        .text("Deviation from the mean skin temperature in °F");
+
+        // Draw mean line
+        svg.append("line")
+            .attr("class", "mean-line")
+            .attr("x1", 0)
+            .attr("y1", y(0))
+            .attr("x2", width)
+            .attr("y2", y(0))
+            .attr("stroke", "red")
+            .attr("stroke-width", 2);
+
 
         // Bars
         svg.selectAll("mybar")
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return x(d.date); })
-        .attr("y", function(d) { return y(d.Temperature); })
-        .attr("width", 15)
-        .attr("height", function(d) { return height - margin.bottom - y(d.Temperature); })
-        .attr("fill", "#69b3a2")
+        .attr("x", function(d) { return x(d.date) -8.5; })
+         // When the value is positive we draw a bar from y(d.Temperature) to y(0) else from y(0) to y(d.Temperature)
+        .attr("y", function(d) {return d.Temperature > 0 ? y(d.Temperature) : y(0);})
+        .attr("width", 17)
+         // The height is the absolute deviation from the mean
+        .attr("height",function(d) { return Math.abs(y(d.Temperature) - y(0));})
+         // Change color based on positive / negative deviation
+        .attr("fill", function(d){ return  d.Temperature > 0 ? "#69b3a2"  : "#4b4bff"; })
+
+        // Display the value of each bar
+        svg.selectAll("mytext")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "mytext")
+            .attr("x", function(d){ return x(d.date) ; })
+            .attr("y", function(d){ return  d.Temperature > 0 ? y(d.Temperature) + 10 : y(d.Temperature) - 5; })
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "9px")
+            .attr("fill" , "white")
+            .attr("text-anchor", "middle")
+            .text(function(d) { return d.Temperature.toFixed(1); });
 })}

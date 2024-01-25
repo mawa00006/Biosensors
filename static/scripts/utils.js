@@ -6,7 +6,7 @@ function convertUTCDateToLocalDate(date) {
 function preProcessAndAggregateData(data, variable){
         var range = getSelectedDateRange();
         var startDate = range.startDate._d; // Access the start date
-        var endDate = new Date(range.startDate._d.getTime()); // Access the end date
+        var endDate = new Date(range.startDate._d.getTime()); // Set end data to start date
 
 
         // Set year to 2015
@@ -33,6 +33,7 @@ function preProcessAndAggregateData(data, variable){
 
         // Create an array of time intervals
         var timeIntervals = d3.timeHours(d3.timeHour.offset(startDate, -2), d3.timeHour.offset(endDate, -2));
+
         // Add one hour before the start date to the time intervals
         var additionalTimeInterval = d3.timeHour.offset(startDate, -3);
         timeIntervals.unshift(additionalTimeInterval);
@@ -40,14 +41,22 @@ function preProcessAndAggregateData(data, variable){
         // Aggregate data within each interval
        data = timeIntervals.map(function (intervalStart, i) {
             var intervalEnd = d3.timeHour.offset(intervalStart, 1);
-            console.log(intervalStart, intervalEnd)
             var valuesInInterval = data.filter(function (d) {
                 return d3.timeHour.offset(d.date, -2) >= intervalStart && d3.timeHour.offset(d.date, -2) < intervalEnd;
             });
+
+            // For the temperature we want the mean
+            if(variable === 'Temperature')
+            {return {
+                date: intervalStart,
+                [variable]: d3.mean(valuesInInterval, function (d) { return d[variable]; })
+            };}
+            // For steps and calories the sum
+            else {
             return {
                 date: intervalStart,
                 [variable]: d3.sum(valuesInInterval, function (d) { return d[variable]; })
-            };
+            };}
         });
 
        return data
