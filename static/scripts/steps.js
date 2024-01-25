@@ -3,7 +3,7 @@
 function generateStepsGraph() {
 
     var margin = {top: 10, right: 20, bottom: 50, left: 50},
-        width = 700 - margin.left - margin.right,
+        width = 1000 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
         // create an SVG container that holds the chart
@@ -17,61 +17,20 @@ function generateStepsGraph() {
 
         d3.csv(dataset).then(function(data) {
 
-        // Get start and end date from datepicker
-        var range = getSelectedDateRange();
-        var startDate = range.startDate._d;
-        var endDate = range.endDate._d;
-
-
-        // Set year to 2015
-        endDate.setUTCFullYear(2015);
-        // Set year to 2015
-        startDate.setUTCFullYear(2015);
-
-        // We want to display all data from the start of the startDate till the end of endDay
-        startDate.setUTCHours(0, 0, 0, 0);
-        endDate.setUTCHours(23, 59, 0, 0);
-
-        // When reading the data, format variables:
-        var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%SZ");
-
-        // Parse data
-        data.forEach(function(d) {
-          d.date = parseTime(d.Time);
-          d.Steps = +d.Steps;
-        });
-
-        // Filter the data based on the selected date range
-        data = data.filter(function (d) {
-        return d.date >= startDate && d.date <= endDate;
-        });
-
-        // Create an array of time intervals
-        var timeIntervals = d3.timeHours(startDate, d3.timeHour.offset(endDate, 0));
-
-
-        // Aggregate data within each interval
-       data = timeIntervals.map(function (intervalStart, i) {
-            var intervalEnd = d3.timeHour.offset(intervalStart, 1);
-            var valuesInInterval = data.filter(function (d) {
-                return d.date >= intervalStart && d.date < intervalEnd;
-            });
-            return {
-                date: intervalStart,
-                Steps: d3.sum(valuesInInterval, function (d) { return d.Steps; })
-            };
-        });
+        data = preProcessAndAggregateData(data, 'Steps');
 
         // X axis
         var x = d3.scaleUtc()
-        .range([ 0, width ])
+        .range([ 0, width -300 ])
         .domain(d3.extent(data, function(d) { return d.date; }));
 
         // Set tick values of X axis to every 60 minutes
-        var tickValues = d3.timeMinute.every(60).range(x.domain()[0], x.domain()[1]);
+        var tickValues = d3.timeMinute.every(60).range(x.domain()[0], d3.timeHour.offset(x.domain()[1], 1));
         svg.append("g")
-        .attr("transform", "translate(0," + (height -margin.bottom) + ")")
-        .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(d3.timeFormat("%H")));
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(function(date) {
+            return customTickFormat(date, tickValues);
+        }));
 
 
         // Add Y axis
@@ -101,7 +60,7 @@ function generateStepsGraph() {
             .attr("class", "mean-line")
             .attr("x1", 0)
             .attr("y1", y(meanSteps))
-            .attr("x2", width)
+            .attr("x2", width -300)
             .attr("y2", y(meanSteps))
             .attr("stroke", "red")
             .attr("stroke-width", 2);
