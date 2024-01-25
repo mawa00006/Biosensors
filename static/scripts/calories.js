@@ -19,7 +19,9 @@ function generateCaloriesGraph() {
         var startDate = range.startDate._d; // Access the start date
         var endDate = range.endDate._d; // Access the end date
 
+        console.log(startDate, endDate)
 
+        // TODO only display data for the first day
         // Set year to 2015
         endDate.setUTCFullYear(2015);
         // Set year to 2015
@@ -29,6 +31,7 @@ function generateCaloriesGraph() {
         // We want to display all data from the start of the startDate till the end of endDay
         startDate.setUTCHours(0, 0, 0, 0);
         endDate.setUTCHours(23, 59, 0, 0);
+        console.log(startDate, endDate)
 
         // When reading the data, format variables:
         var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%SZ");
@@ -43,16 +46,19 @@ function generateCaloriesGraph() {
         return d.date >= startDate && d.date <= endDate;
         });
 
-
         // Create an array of time intervals
-        var timeIntervals = d3.timeHours(startDate, d3.timeHour.offset(endDate, 0));
+        var timeIntervals = d3.timeHours(d3.timeHour.offset(startDate, -2), d3.timeHour.offset(endDate, -2));
+        // Add one hour before the start date to the time intervals
+        var additionalTimeInterval = d3.timeHour.offset(startDate, -3);
+        timeIntervals.unshift(additionalTimeInterval);
         console.log(timeIntervals)
 
         // Aggregate data within each interval
        data = timeIntervals.map(function (intervalStart, i) {
             var intervalEnd = d3.timeHour.offset(intervalStart, 1);
+            console.log(intervalStart, intervalEnd)
             var valuesInInterval = data.filter(function (d) {
-                return d.date >= intervalStart && d.date < intervalEnd;
+                return d3.timeHour.offset(d.date, -2) >= intervalStart && d3.timeHour.offset(d.date, -2) < intervalEnd;
             });
             return {
                 date: intervalStart,
@@ -71,14 +77,25 @@ function generateCaloriesGraph() {
         var x = d3.scaleUtc()
         .range([ 0, width -300 ])
         .domain(d3.extent(data, function(d) { return d.date; }));
-
+         console.log(x.domain())
         // Set tick values of X axis to every 60 minutes
-        var tickValues = d3.timeMinute.every(60).range(x.domain()[0], x.domain()[1]);
+        var tickValues = d3.timeMinute.every(60).range(x.domain()[0], d3.timeHour.offset(x.domain()[1], 1));
+        console.log(tickValues)
+
+            // Define a custom tick formatter function
+    function customTickFormat(date) {
+        if (date.getTime() === tickValues[0].getTime()) {
+            // Display date for the first tick
+            return d3.timeFormat("%d.%m")(date);
+        } else {
+            // Display hour for other ticks
+            return d3.timeFormat("%H")(date);
+    }
+}
 
         svg.append("g")
         .attr("transform", "translate(0," + (height -margin.bottom) + ")")
-        .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(d3.timeFormat("%H")));
-
+        .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(customTickFormat));
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -86,6 +103,15 @@ function generateCaloriesGraph() {
         .range([ height - margin.bottom , 0]);
         svg.append("g")
         .call(d3.axisLeft(y));
+
+        // Y-Axis label
+        svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Calories burned / hour");
 
         // Bars
         svg.selectAll("mybar")
