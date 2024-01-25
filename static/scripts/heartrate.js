@@ -18,7 +18,7 @@ function generateHeartrateGraph() {
         d3.csv(dataset).then(function(data) {
                 var range = getSelectedDateRange();
         var startDate = range.startDate._d; // Access the start date
-        var endDate = range.endDate._d; // Access the end date
+        var endDate = new Date(range.startDate._d.getTime()); // Access the end date
 
 
         // Set year to 2015
@@ -31,6 +31,8 @@ function generateHeartrateGraph() {
         startDate.setUTCHours(0, 0, 0, 0);
         endDate.setUTCHours(23, 59, 0, 0);
 
+        startDate =  d3.timeHour.offset(startDate, -2)
+        endDate =  d3.timeHour.offset(endDate, -2)
         // When reading the data, format variables:
         var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%SZ");
 
@@ -55,6 +57,7 @@ function generateHeartrateGraph() {
         .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(function(date) {
             return customTickFormat(date, tickValues);
         }));
+
 
         // Add Y axis
         var y = d3.scaleLinear()
