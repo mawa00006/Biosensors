@@ -132,7 +132,7 @@ function generateCaloriesGraph() {
             .attr("class", "mean-line")
             .attr("x1", 0)
             .attr("y1", y(meanCalories))
-            .attr("x2", width - 300)
+            .attr("x2", width - 300 + 7.5)
             .attr("y2", y(meanCalories))
             .attr("stroke", "red")
             .attr("stroke-width", 2);
