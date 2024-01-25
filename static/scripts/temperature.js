@@ -2,8 +2,9 @@
 
 function generateTemperatureGraph() {
 
-var margin = {top: 10, right: 20, bottom: 50, left: 50},
-        width = 700 - margin.left - margin.right,
+        var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        var margin = {top: 10, right: 20, bottom: 30, left: (windowWidth/2)*0.05},
+        width = (windowWidth/2.15) - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
         // create an SVG container that holds the chart
@@ -46,7 +47,7 @@ var margin = {top: 10, right: 20, bottom: 50, left: 50},
         // TODO show exactly 24 bins for each day
         // X axis
         var x = d3.scaleUtc()
-        .range([ 0, width ])
+        .range([ 0, width - margin.left - margin.right])
         .domain(d3.extent(data, function(d) { return d.date; }));
         svg.append("g")
         .attr("transform", "translate(0," + (height -margin.bottom) + ")")

@@ -1,8 +1,9 @@
 // Mattes Warning + Jan Früh (modified for implementation in the website layout)
 
 function generateHeartrateGraph() {
-var margin = {top: 10, right: 20, bottom: 50, left: 50},
-        width = 700 - margin.left - margin.right,
+        var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        var margin = {top: 10, right: 20, bottom: 30, left: (windowWidth/2)*0.05},
+        width = (windowWidth/2.15) - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
         // create an SVG container that holds the chart
@@ -46,7 +47,7 @@ var margin = {top: 10, right: 20, bottom: 50, left: 50},
         // Add X axis --> date format
         var x = d3.scaleUtc()
           .domain(d3.extent(data, function(d) { return d.date; }))
-          .range([0, width]);
+          .range([0, width - margin.left - margin.right]);
         // Set tick values of X axis to every 60 minutes
         var tickValues = d3.timeMinute.every(60).range(x.domain()[0], d3.timeHour.offset(x.domain()[1], 1));
         svg.append("g")
