@@ -16,10 +16,11 @@ var margin = {top: 10, right: 20, bottom: 50, left: 50},
               "translate(" + margin.left + "," + margin.top + ")");
 
         d3.csv(dataset).then(function(data) {
-var range = getSelectedDateRange();
+        var range = getSelectedDateRange();
         var startDate = range.startDate._d; // Access the start date
         var endDate = range.endDate._d; // Access the end date
 
+        // TODO only display data for the first day
         // Set year to 2015
         endDate.setUTCFullYear(2015);
         // Set year to 2015
@@ -41,6 +42,8 @@ var range = getSelectedDateRange();
         data = data.filter(function (d) {
         return d.date >= startDate && d.date <= endDate;
         });
+
+        // TODO show exactly 24 bins for each day
         // X axis
         var x = d3.scaleUtc()
         .range([ 0, width ])
@@ -55,6 +58,15 @@ var range = getSelectedDateRange();
         .range([height - margin.bottom , 0]);
         svg.append("g")
         .call(d3.axisLeft(y));
+
+        // Y-Axis label
+        svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Heartrate (bpm)");
 
         // Bars
         svg.selectAll("mybar")
