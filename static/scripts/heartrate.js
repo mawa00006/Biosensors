@@ -47,9 +47,13 @@ var margin = {top: 10, right: 20, bottom: 50, left: 50},
         var x = d3.scaleUtc()
           .domain(d3.extent(data, function(d) { return d.date; }))
           .range([0, width]);
+        // Set tick values of X axis to every 60 minutes
+        var tickValues = d3.timeMinute.every(60).range(x.domain()[0], d3.timeHour.offset(x.domain()[1], 1));
         svg.append("g")
-          .attr("transform", "translate(0," + (height -margin.bottom) + ")")
-          .call(d3.axisBottom(x));
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(function(date) {
+            return customTickFormat(date, tickValues);
+        }));
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -58,6 +62,14 @@ var margin = {top: 10, right: 20, bottom: 50, left: 50},
         svg.append("g")
           .call(d3.axisLeft(y));
 
+        // Y-Axis label
+        svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Heartrate (bpm)");
 
             // Set the gradient
         svg.append("linearGradient")
@@ -79,6 +91,7 @@ var margin = {top: 10, right: 20, bottom: 50, left: 50},
           .enter().append("stop")
             .attr("offset", function(d) { return d.offset; })
             .attr("stop-color", function(d) { return d.color; });
+
         // Add the line
         svg.append("path")
           .datum(data)
