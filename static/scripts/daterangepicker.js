@@ -51,6 +51,36 @@ $(document).ready(function () {
             startDate: picker.startDate,
             endDate: picker.endDate,
         };
+        
+        /*
+        When a new date range is selected, the D3 graph with the old date range is removed from the svg.
+        The new D3 graph is generated and placed in the position of the old one.
+        */
+        if(clickCountSteps % 2 != 0){
+            var svg = d3.select('#steps')
+            svg.selectAll("*").remove();
+            generateStepsGraph();
+        }
+
+        if(clickCountHeartrate % 2 != 0){
+            var svg = d3.select('#heartrate')
+            svg.selectAll("*").remove();
+            generateHeartrateGraph();
+        }
+
+        if(clickCountTemp % 2 !=0){
+            var svg = d3.select('#temperature')
+            svg.selectAll("*").remove();
+            generateTemperatureGraph();
+        }
+
+        if(clickCountCalo % 2 !=0){
+            var svg = d3.select('#calories')
+            svg.selectAll("*").remove();
+            generateCaloriesGraph();
+        }
+
+
     });
 
     // Open DateRangePicker when the button is clicked

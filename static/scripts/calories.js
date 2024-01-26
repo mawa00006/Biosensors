@@ -1,11 +1,5 @@
 // Mattes Warning + Jan Früh (modified for implementation in the website layout)
-let svg = null;
 function generateCaloriesGraph() {
-
-        // Remove existing SVG element (when a new date range is selected)
-        if (svg) {
-                 svg.remove();
-        }
         var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         var margin = {top: 10, right: 20, bottom: 30, left: (windowWidth/2)*0.05},
         width = (windowWidth/2.15) - margin.left - margin.right,
