@@ -1,4 +1,5 @@
 // Mattes Warning + Jan Früh (modified for implementation in the website layout)
+// + Sarah Fiener (changed to safeblind colors)
 
 function generateStepsGraph() {
         var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -57,8 +58,12 @@ function generateStepsGraph() {
         .attr("x", function(d) { return x(d.date) -10; })
         .attr("y", function(d) { return y(d.Steps); })
         .attr("width", 20)
-        .attr("height", function(d) { return height - margin.bottom - y(d.Steps); })
-        .attr("fill", "#69b3a2")
+        .attr("height", function (d) { return height - margin.bottom - y(d.Steps); })
+        .attr("fill", "rgb(86,180,233)")  // Sarah: changed colors to safeblind options.
+            .attr("rx", 2)  // Sarah: bars to a more clean style
+            .attr("ry", 2)  // Sarah: bars to a more clean style
+            .style("stroke", "#333") // Color for the border of the bars
+            .style("stroke-width", 1); // Width of the border
 
 
             // Calculate the mean of all step values
@@ -71,7 +76,7 @@ function generateStepsGraph() {
             .attr("y1", y(meanSteps))
             .attr("x2", width)
             .attr("y2", y(meanSteps))
-            .attr("stroke", "red")
+            .attr("stroke", "rgb(213,94,0)") // Sarah: changed colors to safeblind options.
             .attr("stroke-width", 2);
 
             // Add a tick for the mean value on the Y axis
