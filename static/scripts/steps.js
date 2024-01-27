@@ -1,5 +1,6 @@
 // Mattes Warning + Jan Früh (modified for implementation in the website layout)
 // + Sarah Fiener (changed to safeblind colors)
+// Sarah Fiener: added comment for commit check
 
 function generateStepsGraph() {
         var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
