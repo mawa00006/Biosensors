@@ -55,15 +55,28 @@ function generateStepsGraph() {
         Add a function to the svg container of the d3 graph which waits until the user clicks on a datapoint
         in the graph and gives the exakt time slot of the requested position of the graph in the terminal back. 
         */
-        svg.on('click', function(event){
-            //Get the coordinates of the mouse related to the chart
-            const [mouseX, mouseY] = d3.pointer(event);
-            //invert metod to get the time of the UTC time scale
-            const mouseTime = x.invert(mouseX);
-            //Converts the mouseTime variable to a string obejct.
-            String(mouseTime);
-            //Print the result in the console
-            console.log("mouse X time: ", mouseTime);
+        svg.on('click', function date(event){
+            //Get the coordinates of the mouse related to the chart.
+            let [mouseX, mouseY] = d3.pointer(event);
+            //Get the time of the UTC time scale and create a new object of the type 'Date'.
+            const mouseTime =new Date([x.invert(mouseX)]);
+            //Get only the hour of the whole 'Date' object.
+            var time = mouseTime.getHours();
+            //Print the results for constructing in the console.
+            console.log("mouse X time: ", time);
+            console.log("mouse X : ", mouseX);
+            console.log(typeof(time));
+            //Insert a vertical highlighting line in green to visualize the current spot.
+            for (let i= 0; i< 24; i++){
+                if (time == i){
+                    svg.append("line")
+                        .style("stroke", "green")
+                        .attr("x1", (29 + 28.95 * i))
+                        .attr("x2", (29 + 28.95 * i))
+                        .attr("y1", 0)
+                        .attr("y2", 300);
+                }
+            }
         })
 
         // Bars
