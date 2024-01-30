@@ -51,6 +51,21 @@ function generateStepsGraph() {
             .attr("transform", "rotate(-90)")
             .text("Steps / hour");
 
+        /*
+        Add a function to the svg container of the d3 graph which waits until the user clicks on a datapoint
+        in the graph and gives the exakt time slot of the requested position of the graph in the terminal back. 
+        */
+        svg.on('click', function(event){
+            //Get the coordinates of the mouse related to the chart
+            const [mouseX, mouseY] = d3.pointer(event);
+            //invert metod to get the time of the UTC time scale
+            const mouseTime = x.invert(mouseX);
+            //Converts the mouseTime variable to a string obejct.
+            String(mouseTime);
+            //Print the result in the console
+            console.log("mouse X time: ", mouseTime);
+        })
+
         // Bars
         svg.selectAll("mybar")
             .data(data)
