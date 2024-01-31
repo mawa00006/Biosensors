@@ -52,6 +52,15 @@ function generateStepsGraph() {
             .text("Steps / hour");
 
         /*
+        Add a callback function to extract the 'time' value of the svg.on('click', function date(event){}) 
+        to use it in a other javascript.
+        */
+        function handleClickCallback(time, callback){
+            var gloabalVariable = time;
+            callback(time);
+           }       
+
+        /*
         Add a function to the svg container of the d3 graph which waits until the user clicks on a datapoint
         in the graph and gives the exakt time slot of the requested position of the graph in the terminal back. 
         */
@@ -67,6 +76,14 @@ function generateStepsGraph() {
             console.log("mouse X : ", mouseX);
             console.log(typeof(time));
 
+
+            //Call the dateHeartrate function from outside of the current function body.
+            handleClickCallback(time, function(gloabalVariable){
+                dateHeartrate(gloabalVariable);
+            })
+
+            //Assign the time slot to the global variable 'gloabalVariable'.
+            gloabalVariable = time;
 
              //Remove the vertical line if a other position in the graph is selected.
              if (clipboard != time){
@@ -90,7 +107,7 @@ function generateStepsGraph() {
                         .attr("y2", 300);
                 }
             }
-        })
+        });
 
         // Bars
         svg.selectAll("mybar")
@@ -243,4 +260,12 @@ function generateStepsGraph() {
 
 
     })
+}
+
+/*
+Define a function which takes the time value from the local function with 
+the callback function and makes it accessable for other scripts.
+*/
+function dateHeartrate(gloabalVariable){
+        return gloabalVariable;
 }
