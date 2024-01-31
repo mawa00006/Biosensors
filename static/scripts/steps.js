@@ -66,11 +66,24 @@ function generateStepsGraph() {
             console.log("mouse X time: ", time);
             console.log("mouse X : ", mouseX);
             console.log(typeof(time));
+
+
+             //Remove the vertical line if a other position in the graph is selected.
+             if (clipboard != time){
+                var lineOfInterest = d3.select(".line1");
+                lineOfInterest.remove(); 
+            }
+
+
             //Insert a vertical highlighting line in green to visualize the current spot.
             for (let i= 0; i< 24; i++){
                 if (time == i){
+                    var clipboard = time;
                     svg.append("line")
                         .style("stroke", "green")
+                        .attr("class", "line1")
+                        .attr("stroke-width", 21)
+                        .attr("opacity", 0.4)
                         .attr("x1", (29 + 28.95 * i))
                         .attr("x2", (29 + 28.95 * i))
                         .attr("y1", 0)
