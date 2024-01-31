@@ -1,5 +1,4 @@
 // Mattes Warning + Jan Früh (modified for implementation in the website layout)
-
 function generateHeartrateGraph() {
         var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         var margin = {top: 10, right: 20, bottom: 30, left: (windowWidth/2)*0.05},
@@ -75,7 +74,28 @@ function generateHeartrateGraph() {
         .attr("transform", "rotate(-90)")
         .text("Heartrate (bpm)");
 
-            // Set the gradient
+        //Draw a 'higlight line' at the same time slot like in the step.js graph.
+        svg.on('mousemove', function date(event){
+          //Use the variable 'globalVariable' from the step.js which includes the current requested time slot.
+          var test =dateHeartrate(gloabalVariable);
+          //Exchange the old line with the new line.
+          var lineOfInterest = d3.select(".line2");
+          lineOfInterest.remove(); 
+        
+          
+        //Draw and append the 'highlight line' with the value of the time spot in the step.js to the graph.
+        svg.append("line")
+              .style("stroke", "green")
+              .attr("class", "line2")
+              .attr("stroke-width", 21)
+              .attr("opacity", 0.4)
+              .attr("x1", (29 + 30 * test))
+              .attr("x2", (29 + 30 * test))
+              .attr("y1", 0)
+              .attr("y2", 500);
+        });
+
+        // Set the gradient
         svg.append("linearGradient")
           .attr("id", "line-gradient")
           .attr("gradientUnits", "userSpaceOnUse")
