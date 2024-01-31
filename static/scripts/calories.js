@@ -55,6 +55,27 @@ function generateCaloriesGraph() {
         .attr("transform", "rotate(-90)")
         .text("Calories burned / hour");
 
+        //Draw a 'higlight line' at the same time slot like in the step.js graph.
+        svg.on('mousemove', function date(event){
+            //Use the variable 'globalVariable' from the step.js which includes the current requested time slot.
+            var calo =dateHeartrate(gloabalVariable);
+            //Exchange the old line with the new line.
+            var lineOfInterest = d3.select(".line4");
+            lineOfInterest.remove(); 
+          
+            
+          //Draw and append the 'highlight line' with the value of the time spot in the step.js to the graph.
+          svg.append("line")
+                .style("stroke", "green")
+                .attr("class", "line4")
+                .attr("stroke-width", 21)
+                .attr("opacity", 0.4)
+                .attr("x1", (29 + 30 * calo))
+                .attr("x2", (29 + 30 * calo))
+                .attr("y1", 0)
+                .attr("y2", 500);
+          });
+
         // Bars
         svg.selectAll("mybar")
         .data(data)
