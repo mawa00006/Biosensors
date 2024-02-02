@@ -63,8 +63,11 @@ Biosensors does not require specific configuration. However, if you encounter is
 
 ## Features
 
-- **Graph Visualization:** Display data graphs for steps, heart rate, temperature, and calories.
-- **User-Friendly Interface:** Simple and intuitive interface for easy navigation.
+- **Graph Visualization:** Display data graphs for steps, heart rate, temperature, and calories in a combined grid layout to get a easier overview of many data points.
+- **User-Friendly Interface:** Using a toolbar with generalized icons for the different datasets to get a clear interface without many possible buttons. This minimizes the complexity of the tool and enhances the usability for the user.
+- **Highlighting of regions of interest:** Make it possible to highlight regions of interest in the displayed data sets and update the region by slecting a new time point.
+- **Education/ fun facts in the field of healthcare:** Displaying intersting insights about the different datasets to educate the user. Most of the time a person remebers the most random facts the best ;).
+- **Enhancement of the motivation:** Displaying the an overall step counter per day and highlighting the best hour of the day.
 - **Date Range Picker:** Select a specific time range for data visualization.
 
 ## Contributing
