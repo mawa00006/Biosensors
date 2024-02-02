@@ -32,6 +32,22 @@ To install Biosensors, follow these steps:
 Once installed, you can access Biosensors by opening the `index.html` file in your web browser. The interface includes buttons for different metrics such as steps, heart rate, temperature, and calories. Click on each button to visualize the corresponding data graph.
 Additionally, the Date Range Picker feature allows users to select a specific time range for a more detailed view of their data.
 
+## Workflow
+
+1. Click on the button 'Open calendar' in the toolbar on the left corner and select a time point to get further information about your data.
+2. If the selection of your date worked, the correct date should be updated beneath the 'Open calendar' button.
+3. To visualize the dataset you first need to press the 'Step'-Button (two footprints).
+4. A selected button is highlighted in light blue. (To check if the button is currently pressed).
+5. Now you should see the steps of the selected day per hour in the format of a bar chart. Every bar chart includes a number which represents the explizit height of the bar.
+   The red line which is horizontally aligned displays the mean of the steps of the day.
+6. The question sign can give you the information about the total steps you performed at this day and a star highlights the bar with the most steps at the day.
+7. Hovering over the graph or the icon can show you additional informations and fun facts about the subject.
+8. Now you should select a time point which draws your attention for further analysis by clicking on the step graph.
+9. The requested time point should light up in a vertical green bar.
+10. Now you can click on one of the remaining buttons (curve symbol = Heartrate; thermostat symbol = temperatrue; burger symbol = calories) to display the related data.
+11. If you hover throught the different graphs, you get the same highlight in the datasets.
+12. Maybe you want to select a new time point? No problem. Execute step 8 again and hover of the remaining graphs to get the the new region of interest for analysis.
+
 ### Configuration
 
 Biosensors does not require specific configuration. However, if you encounter issues, ensure that you have the necessary dependencies installed and that your browser is up to date.
