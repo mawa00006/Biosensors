@@ -6,13 +6,14 @@ Biosensors is a project aimed at visualizing data measured with biosensors in a 
 
 1. [Introduction](#introduction)
 2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Configuration](#configuration)
-5. [Features](#features)
-6. [Contributing](#contributing)
-7. [Credits](#credits)
-8. [License](#license)
-9. [Additional Notes](#additional-notes)
+3. [Solving real world challenges](#Solving-real-world-challenges)
+4. [Workflow](#Workflow)
+5. [Configuration](#configuration)
+6. [Features](#features)
+7. [Contributing](#contributing)
+8. [Credits](#credits)
+9. [License](#license)
+10. [Additional Notes](#additional-notes)
 
 ## Introduction
 
@@ -27,10 +28,18 @@ To install Biosensors, follow these steps:
 3. Install dependencies: `npm install`
 4. Start the application: `npm start`
 
-## Usage
+## Solving real world challenges
 
 Once installed, you can access Biosensors by opening the `index.html` file in your web browser. The interface includes buttons for different metrics such as steps, heart rate, temperature, and calories. Click on each button to visualize the corresponding data graph.
-Additionally, the Date Range Picker feature allows users to select a specific time range for a more detailed view of their data.
+
+The programm was developed to face the problem of visualize many measured data points from sensors. 
+To make it possible to interact with the collected data of the user, we provide a layout grid to visualize the different graphs in a combined manner on the screen. 
+Therefore the tool always recognizes how many views of the data are selected to fit the graphs on the full width and height of the screen. 
+Also we introduce a way to interact with the different data sets through highlighting a requested time range in every graph. 
+This enables a faster analysis of the displayed data. We also want to educate the users in the field of health care by providing some information about the different data sets on the screen. 
+To enlarge the motivation of the user, we provide a step counter per day and a star for the best hour for every day. 
+Additionally, the Date Range Picker feature allows users to select a specific time range for a more detailed view of their data. 
+
 
 ## Workflow
 
