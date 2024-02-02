@@ -10,10 +10,11 @@ Biosensors is a project aimed at visualizing data measured with biosensors in a 
 4. [Workflow](#Workflow)
 5. [Configuration](#configuration)
 6. [Features](#features)
-7. [Contributing](#contributing)
-8. [Credits](#credits)
-9. [License](#license)
-10. [Additional Notes](#additional-notes)
+7. [Challenges/Future features](#Challenges/Future-features)
+8. [Contributing](#contributing)
+9. [Credits](#credits)
+10. [License](#license)
+11. [Additional Notes](#additional-notes)
 
 ## Introduction
 
@@ -69,6 +70,19 @@ Biosensors does not require specific configuration. However, if you encounter is
 - **Education/ fun facts in the field of healthcare:** Displaying intersting insights about the different datasets to educate the user. Most of the time a person remebers the most random facts the best ;).
 - **Enhancement of the motivation:** Displaying the an overall step counter per day and highlighting the best hour of the day.
 - **Date Range Picker:** Select a specific time range for data visualization.
+
+## Challenges/Future features
+
+1. Overview of the datasets:
+
+The idea of this feature was to visualize a overview of the whole data set (for example: Steps) 
+beneath the displayed graph (with the selected date range). So the user would have been provided 
+like in other tools to always see at which time range in the whole dataset he is currently. 
+To make it more user-friendly we also thought about highlighting the current region in the overview. 
+But unfortunately we could not implement the overview beneath the graph. 
+For future enhancment of the tool we would want to provide a version were the overview is integrated in the current version.
+
+  
 
 ## Contributing
 
