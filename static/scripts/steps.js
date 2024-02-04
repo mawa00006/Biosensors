@@ -84,7 +84,7 @@ function generateStepsGraph() {
             .attr("class", "y-axis")
             .call(d3.axisLeft(y).tickValues([meanSteps]))
             .selectAll("text")
-            .style("fill", "red");
+            .style("fill", "rgb(213,94,0)");
 
         // Display the value of each bar
         svg.selectAll("mytext")
@@ -123,6 +123,19 @@ function generateStepsGraph() {
             .attr("font-size", "20px")
             .attr("stroke", "black")
             .attr("stroke-width", 1);
+
+        // Find the data point with the least steps
+        var minStepsData = data.reduce(function (prev, current) {
+            return (prev.Steps < current.Steps) ? prev : current;
+        });
+
+        // Highlight the bar with the least steps
+        svg.selectAll("rect")
+            .filter(function (d) {
+                return d.date === minStepsData.date;
+            })
+            .attr("fill", "lightblue");
+
 
         // Set the background color and opacity
         var backgroundColor = "lightgray";
