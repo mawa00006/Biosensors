@@ -71,16 +71,27 @@ Biosensors does not require specific configuration. However, if you encounter is
 - **Enhancement of motivation:** Displaying an overall step counter per day and highlighting the best hour of the day.
 - **Date Range Picker:** Select a specific time range for data visualization.
 
-## Challenges/Future features
+## Outlook
 
-1. Overview of the datasets:
+Given more time, the following steps could have been explored:
 
-The idea of this feature was to visualize a overview of the whole data set (for example: Steps) 
-beneath the displayed graph (with the selected date range). So the user would have been provided 
-like in other tools to always see at which time range in the whole dataset he is currently. 
+### Overview of the datasets:
+The idea of this feature was to visualize an overview of the whole data set (for example: Steps) 
+beneath the displayed graph (with the selected date range). So the user would be able to always see what date range in the whole dataset he is currently at. 
 To make it more user-friendly we also thought about highlighting the current region in the overview. 
-But unfortunately we could not implement the overview beneath the graph. 
-For future enhancment of the tool we would want to provide a version were the overview is integrated in the current version.
+
+### Custom Data:
+Users can modify the tool to use their own individual data by ensuring it is in the correct format. Data Import/Export would allow users to import/export their biosensor data in various formats.
+
+### Responsive Design:
+Optimize the interface for a seamless experience across different devices.
+
+### User Authentication:
+Implement user accounts to securely store and retrieve personal health data.
+
+### Additional Metrics:
+Expand the tool to include more health metrics and customizable dashboard components.
+
 
   
 
@@ -105,18 +116,3 @@ Please adhere to the [Contributor Covenant Code of Conduct](CONTRIBUTING.md).
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Additional Notes
-
-### Custom Data
-
-Users can modify the tool to use their own individual data by ensuring it is in the correct format.
-
-### Future Steps
-
-Given more time, the following steps could have been explored:
-
-1. **User Authentication:** Implement user accounts to securely store and retrieve personal health data.
-2. **Data Import/Export:** Allow users to import/export their biosensor data in various formats.
-3. **Additional Metrics:** Expand the tool to include more health metrics and customizable dashboard components.
-4. **Responsive Design:** Optimize the interface for a seamless experience across different devices.
