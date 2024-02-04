@@ -247,4 +247,3 @@ function generateCaloriesGraph() {
 
 
     })
-}

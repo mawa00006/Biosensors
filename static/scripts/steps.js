@@ -258,13 +258,13 @@ function generateStepsGraph() {
             // Remove existing sum display if any
             svg.selectAll(".sum-display").remove();
 
-            // Display the total sum of steps in the upper left part of the graph
+            // Display the total sum of steps in the middle-top part of the graph
             svg.append("text")
                 .attr("class", "sum-display")
-                .attr("x", 10 + 30 / 2)
-                .attr("y", 10 + 30 / 2)
+                .attr("x", width / 2)
+                .attr("y", margin.top)
                 .attr("text-anchor", "middle")
-                .attr("dominant-baseline", "middle")
+                .attr("dominant-baseline", "hanging")
                 .text("Total Steps: " + totalSteps);
         }
 
