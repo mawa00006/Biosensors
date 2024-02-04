@@ -47,10 +47,10 @@ Additionally, the Date Range Picker feature allows users to select a specific ti
 1. Click on the button 'Open calendar' in the toolbar on the left corner and select a time point to get further information about your data.
 2. If the selection of your date worked, the correct date should be updated beneath the 'Open calendar' button.
 3. To visualize the dataset you first need to press the 'Step'-Button (two footprints).
-4. A selected button is highlighted in light blue. (To check if the button is currently pressed).
+4. The selected button is highlighted in light blue. (To check if the button is currently pressed).
 5. Now you should see the steps of the selected day per hour in the format of a bar chart. Every bar chart includes a number which represents the explizit height of the bar.
    The red line which is horizontally aligned displays the mean of the steps of the day.
-6. The question sign can give you the information about the total steps you performed at this day and a star highlights the bar with the most steps at the day.
+6. The question sign can give you the information about the total steps you performed at this day and a star highlights the bar with the most steps at the selected date.
 7. Hovering over the graph or the icon can show you additional informations and fun facts about the subject.
 8. Now you should select a time point which draws your attention for further analysis by clicking on the step graph.
 9. The requested time point should light up in a vertical green bar.
