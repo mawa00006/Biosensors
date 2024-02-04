@@ -1,6 +1,4 @@
 // Mattes Warning + Jan Früh (modified for implementation in the website layout)
-// Sarah Fiener changes to background of graph, add mean, highest and lowest HR
-
 function generateHeartrateGraph() {
   var windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
   var margin = { top: 25, right: 20, bottom: 45, left: (windowWidth / 2) * 0.05 },
@@ -65,35 +63,56 @@ function generateHeartrateGraph() {
     svg.append("g")
       .call(d3.axisLeft(y));
 
-    // Y-Axis label
-    svg.append("text")
-      .attr("class", "y label")
-      .attr("text-anchor", "end")
-      .attr("y", 6)
-      .attr("dy", ".75em")
-      .attr("transform", "rotate(-90)")
-      .text("Heartrate (bpm)");
+        // Y-Axis label
+        svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Heartrate (bpm)");
 
-    // Set the gradient
-    svg.append("linearGradient")
-      .attr("id", "line-gradient")
-      .attr("gradientUnits", "userSpaceOnUse")
-      .attr("x1", 0)
-      .attr("y1", y(0))
-      .attr("x2", 0)
-      .attr("y2", y(190))
-      .selectAll("stop")
-      .data([
-        { offset: "30%", color: "black" },
-        { offset: "50%", color: "lightgrey" },
-        { offset: "60%", color: "blue" },
-        { offset: "70%", color: "green" },
-        { offset: "80%", color: "yellow" },
-        { offset: "90%", color: "red" },
-      ])
-      .enter().append("stop")
-      .attr("offset", function (d) { return d.offset; })
-      .attr("stop-color", function (d) { return d.color; });
+        //Draw a 'higlight line' at the same time slot like in the step.js graph.
+        svg.on('mousemove', function date(event){
+          //Use the variable 'globalVariable' from the step.js which includes the current requested time slot.
+          var test =dateHeartrate(gloabalVariable);
+          //Exchange the old line with the new line.
+          var lineOfInterest = d3.select(".line2");
+          lineOfInterest.remove(); 
+        
+          
+        //Draw and append the 'highlight line' with the value of the time spot in the step.js to the graph.
+        svg.append("line")
+              .style("stroke", "green")
+              .attr("class", "line2")
+              .attr("stroke-width", 21)
+              .attr("opacity", 0.4)
+              .attr("x1", (29 + 30 * test))
+              .attr("x2", (29 + 30 * test))
+              .attr("y1", 0)
+              .attr("y2", 500);
+        });
+
+        // Set the gradient
+        svg.append("linearGradient")
+          .attr("id", "line-gradient")
+          .attr("gradientUnits", "userSpaceOnUse")
+          .attr("x1", 0)
+          .attr("y1", y(0))
+          .attr("x2", 0)
+          .attr("y2", y(190))
+          .selectAll("stop")
+            .data([
+                {offset: "30%", color: "black"},
+                {offset: "50%", color: "lightgrey"},
+                {offset: "60%", color: "blue"},
+                {offset: "70%", color: "green"},
+                {offset: "80%", color: "yellow"},
+                {offset: "90%", color: "red"},
+            ])
+          .enter().append("stop")
+            .attr("offset", function(d) { return d.offset; })
+            .attr("stop-color", function(d) { return d.color; });
 
     // Add the line
     svg.append("path")

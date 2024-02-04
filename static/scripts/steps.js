@@ -51,6 +51,64 @@ function generateStepsGraph() {
             .attr("transform", "rotate(-90)")
             .text("Steps / hour");
 
+        /*
+        Add a callback function to extract the 'time' value of the svg.on('click', function date(event){}) 
+        to use it in a other javascript.
+        */
+        function handleClickCallback(time, callback){
+            var gloabalVariable = time;
+            callback(time);
+           }       
+
+        /*
+        Add a function to the svg container of the d3 graph which waits until the user clicks on a datapoint
+        in the graph and gives the exakt time slot of the requested position of the graph in the terminal back. 
+        */
+        svg.on('click', function date(event){
+            //Get the coordinates of the mouse related to the chart.
+            let [mouseX, mouseY] = d3.pointer(event);
+            //Get the time of the UTC time scale and create a new object of the type 'Date'.
+            const mouseTime =new Date([x.invert(mouseX)]);
+            //Get only the hour of the whole 'Date' object.
+            var time = mouseTime.getHours();
+            //Print the results for constructing in the console.
+            console.log("mouse X time: ", time);
+            console.log("mouse X : ", mouseX);
+            console.log(typeof(time));
+
+
+            //Call the dateHeartrate function from outside of the current function body.
+            handleClickCallback(time, function(gloabalVariable){
+                dateHeartrate(gloabalVariable);
+            })
+
+            //Assign the time slot to the global variable 'gloabalVariable'.
+            gloabalVariable = time;
+
+             //Remove the vertical line if a other position in the graph is selected.
+             if (clipboard != time){
+                var lineOfInterest = d3.select(".line1");
+                lineOfInterest.remove(); 
+            }
+
+
+            //Insert a vertical highlighting line in green to visualize the current spot.
+            for (let i= 0; i< 24; i++){
+                if (time == i){
+                    var clipboard = time;
+                    svg.append("line")
+                        .style("stroke", "green")
+                        .attr("class", "line1")
+                        .attr("stroke-width", 21)
+                        .attr("opacity", 0.4)
+                        .attr("x1", (29 + 28.95 * i))
+                        .attr("x2", (29 + 28.95 * i))
+                        .attr("y1", 0)
+                        .attr("y2", 300);
+                }
+            }
+        });
+
         // Bars
         svg.selectAll("mybar")
             .data(data)
@@ -215,4 +273,12 @@ function generateStepsGraph() {
 
 
     })
+}
+
+/*
+Define a function which takes the time value from the local function with 
+the callback function and makes it accessable for other scripts.
+*/
+function dateHeartrate(gloabalVariable){
+        return gloabalVariable;
 }
