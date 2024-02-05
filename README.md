@@ -1,6 +1,6 @@
 # Biosensors
 
-Biosensors is a project aimed at visualizing data measured with biosensors in a user-friendly way.
+Biosensors is a project aimed at visualizing data measured with biosensors in a user-friendly way. 
 
 ## Table of Contents
 
@@ -19,6 +19,11 @@ Biosensors is a project aimed at visualizing data measured with biosensors in a 
 ## Introduction
 
 Biosensors is designed to provide an interface for visualizing data collected from biosensors. The project includes graphs for steps, heart rate, temperature, and calories, offering users an insightful view of their health metrics.
+
+Since we are all just at the beginning in our journey working with tools and languages such as html, CSS and JavaScript we primarily aimed for a simple design. We wanted to create a tool that is easy to navigate but still gives you meaningful insights into the different health and wellness data.
+
+Taking into consideration all the tools that already exist on the market processing similar data sets we want to stand out with the possibility to view all the different data sets at one glance. No scrolling or changing the view necessary. We wanted to provide a tool that lets the user choose data dynamically. 
+Furthermore we came to realise, that many of the existing tools leave the user with an immensely load of data to chew on but most of them fail to give context to that data. The user is left with an overwhelming amount of data input while he doesnt know what a specific value means leading to hypochondria in the worst case. We want to provide more information that gives the user a feeling for what the different data mean. With our tool we want to help the user classify the data and putting it into context contributing to our educational mission.
 
 ## Installation
 
@@ -67,9 +72,10 @@ Biosensors does not require specific configuration. However, if you encounter is
 - **Graph Visualization:** Display data graphs for steps, heart rate, temperature, and calories in a combined grid layout to get an easier overview of many data points.
 - **User-Friendly Interface:** Using a toolbar with generalized icons for the different datasets to get a clear interface without a lot of possible buttons. This minimizes the complexity of the tool and enhances the usability for the user.
 - **Highlighting of regions of interest:** Make it possible to highlight regions of interest in the displayed data sets and update the region by slecting a new time point.
-- **Education/ fun facts in the field of healthcare:** Displaying intersting insights about the different datasets to educate the user. Most of the time a person remebers the most random facts the best ;).
+- **Education in the field of healthcare:** Displaying intersting insights about the different datasets to educate the user and give more context. Not only provide nicely visualized data input but also help the user understand, what a given value means.
+- **Fun Facts:** Most of the time a person remebers the most random facts the best ;).
 - **Enhancement of motivation:** Displaying an overall step counter per day and highlighting the best hour of the day.
-- **Date Range Picker:** Select a specific time range for data visualization.
+- **Calendar:** Select a specific date for data visualization.
 
 ## Outlook
 
