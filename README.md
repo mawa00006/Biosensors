@@ -80,6 +80,9 @@ The idea of this feature was to visualize an overview of the whole data set (for
 beneath the displayed graph (with the selected date range). So the user would be able to always see what date range in the whole dataset he is currently at. 
 To make it more user-friendly we also thought about highlighting the current region in the overview. 
 
+### Custom Date Range:
+User can pick a date range in the calendar so that this range is applied to the data and only this data is displayed. The calendar already supports this functionality. The challenge in this functionality is to not compromise readibility and the user experience when choosing a large date range since everything has to be downscaled accordingly. After careful consideration we came to the conclusion that an additional weekly, monthly and yearly view wasn't feasable within the given time. 
+
 ### Custom Data:
 Users can modify the tool to use their own individual data by ensuring it is in the correct format. Data Import/Export would allow users to import/export their biosensor data in various formats.
 
